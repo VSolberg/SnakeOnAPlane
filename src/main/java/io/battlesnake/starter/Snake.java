@@ -134,6 +134,7 @@ public class Snake {
          * @param moveRequest a map containing the JSON sent to this snake. See the spec for details of what this contains.
          * @return a response back to the engine containing snake movement values.
          */
+
         public Map<String, String> move(JsonNode moveRequest) {
             Map<String, String> response = new HashMap<>();
             //response.put("move", "left");
@@ -151,10 +152,14 @@ public class Snake {
 
             if(path != null) {
                 Point playerPoint = PointUtil.parsePoint(playerHead.getX(), playerHead.getY());
-                Point targetPoint = path.get(0);
+                Point targetPoint = path.get(1);
 
                 response = gameMove.getNextAction(playerPoint, targetPoint);
+            }else {
+                aStar.reset();
+                move(moveRequest);
             }
+
 
             return response;
         }
