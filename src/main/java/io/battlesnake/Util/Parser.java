@@ -24,7 +24,9 @@ public class Parser {
 
         for (GameObject food : game_state.getBoard().getFood())
         {
-            Integer food_x = food.getX();
+            return food;
+
+            /*Integer food_x = food.getX();
             Integer food_y = food.getY();
 
             Integer delta_x = abs(head_x - food_x);
@@ -38,7 +40,7 @@ public class Parser {
             {
                 shortest = distance;
                 shortest_food = food;
-            }
+            }*/
         }
 
         return shortest_food;
