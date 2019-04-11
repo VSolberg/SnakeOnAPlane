@@ -34,7 +34,7 @@ public class Parser {
 
             food_map.put(shortest, shortest_food);
 
-            if (distance > shortest)
+            if (distance < shortest)
             {
                 shortest = distance;
                 shortest_food = food;
@@ -88,6 +88,20 @@ public class Parser {
                 Integer y = closest_food.getY();
 
                 new_board[x][y] = 'G';
+            }
+            else
+            {
+                for(Integer x=0; x<width; x++)
+                {
+                    for (Integer y=0; y<height; y++)
+                    {
+                       if (new_board[x][y] != 'X' && new_board[x][y] != 'S')
+                       {
+                           new_board[x][y] = 'G';
+                           return new_board;
+                       }
+                    }
+                }
             }
         }
 
