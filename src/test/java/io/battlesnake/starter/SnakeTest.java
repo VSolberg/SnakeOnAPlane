@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -39,6 +40,7 @@ public class SnakeTest {
     }
 
     @Test
+    @Disabled
     void moveTest() throws IOException {
         JsonNode moveRequest = OBJECT_MAPPER.readTree("{}");
         Map<String, String> response = handler.move(moveRequest);
