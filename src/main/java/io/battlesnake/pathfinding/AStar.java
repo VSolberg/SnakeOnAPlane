@@ -56,21 +56,14 @@ public class AStar {
     }
 
     private List<List<Point>> getOptimalPaths(char[][] map) {
-        map[2][2] = 'G';
-
         String[] mapLayers = new String[15];
 
         for(int i = 0; i < mapLayers.length; i++) {
             mapLayers[i] = new String(map[i]);
+            System.out.println(mapLayers[i]);
         }
 
-        mapLayers[7] = "XXXXXXXXXXXXXXX";
-
-        System.out.println(mapLayers);
         Maze2D maze = new Maze2D(mapLayers);
-
-        System.out.println("Map to pathfind for:");
-        System.out.println(map);
 
         Point localPlayer = maze.getInitialLoc();
         Point food = maze.getGoalLoc();

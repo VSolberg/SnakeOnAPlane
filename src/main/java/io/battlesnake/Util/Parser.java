@@ -57,7 +57,7 @@ public class Parser {
         {
             for (Integer y=0; y<height; y++)
             {
-                new_board[x][y] = ' ';
+                new_board[y][x] = ' ';
             }
         }
 
@@ -69,7 +69,7 @@ public class Parser {
                 Integer x = body_part.getX();
                 Integer y = body_part.getY();
 
-                new_board[x][y] = 'X';
+                new_board[y][x] = 'X';
             }
         }
 
@@ -78,7 +78,7 @@ public class Parser {
             Integer x = game_state.getLocalPlayer().getBody().get(0).getX();
             Integer y = game_state.getLocalPlayer().getBody().get(0).getY();
 
-            new_board[x][y] = 'S';
+            new_board[y][x] = 'S';
         }
 
         // Place closest food
@@ -89,7 +89,7 @@ public class Parser {
                 Integer x = closest_food.getX();
                 Integer y = closest_food.getY();
 
-                new_board[x][y] = 'G';
+                new_board[y][x] = 'G';
             }
             else
             {
