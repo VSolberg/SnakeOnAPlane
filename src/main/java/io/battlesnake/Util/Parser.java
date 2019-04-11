@@ -34,7 +34,7 @@ public class Parser {
 
             food_map.put(shortest, shortest_food);
 
-            if (distance > shortest)
+            if (distance < shortest)
             {
                 shortest = distance;
                 shortest_food = food;
