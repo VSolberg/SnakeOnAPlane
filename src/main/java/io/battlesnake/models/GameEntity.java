@@ -1,11 +1,9 @@
 package io.battlesnake.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
 
 import java.util.List;
 
-@Data
 public class GameEntity {
     @JsonProperty("id")
     private String id;
@@ -18,4 +16,36 @@ public class GameEntity {
 
     @JsonProperty("body")
     private List<GameObject> body;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getHealth() {
+        return health;
+    }
+
+    public void setHealth(Integer health) {
+        this.health = health;
+    }
+
+    public List<GameObject> getBody() {
+        return body;
+    }
+
+    public void setBody(List<GameObject> body) {
+        this.body = body;
+    }
 }
