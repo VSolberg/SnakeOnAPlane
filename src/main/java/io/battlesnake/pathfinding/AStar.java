@@ -55,12 +55,20 @@ public class AStar {
                 .build();
     }
 
-    private List<List<Point>> getOptimalPaths() {
-        Mazes.TestMaze test = Mazes.TestMaze.MAZE2;
-        Maze2D maze = test.getMaze();
+    private List<List<Point>> getOptimalPaths(char[][] map) {
+        map[2][2] = 'G';
 
-        System.out.println("Test maze:");
-        System.out.println(test.getMaze());
+        String[] mapLayers = new String[15];
+
+        for(int i = 0; i < mapLayers.length; i++) {
+            mapLayers[i] = new String(map[i]);
+        }
+
+        System.out.println(mapLayers);
+        Maze2D maze = new Maze2D(mapLayers);
+
+        System.out.println("Map to pathfind for:");
+        System.out.println(map);
 
         Point localPlayer = maze.getInitialLoc();
         Point food = maze.getGoalLoc();
@@ -72,8 +80,8 @@ public class AStar {
         return optimalPaths;
     }
 
-    public List<Point> getNextPath() {
-        allPaths = getOptimalPaths();
+    public List<Point> getNextPath(char[][] map) {
+        allPaths = getOptimalPaths(map);
 
         if(allPaths.size() <= 0 || allPaths.size() < optimalPathIndex)
             return null;

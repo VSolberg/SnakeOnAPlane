@@ -3,7 +3,11 @@ package io.battlesnake.starter;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.battlesnake.Util.GameStateUtil;
+import io.battlesnake.Util.Parser;
+import io.battlesnake.Util.PointUtil;
 import io.battlesnake.action.GameMove;
+import io.battlesnake.models.GameEntity;
+import io.battlesnake.models.GameObject;
 import io.battlesnake.models.GameState;
 import io.battlesnake.pathfinding.AStar;
 import org.slf4j.Logger;
@@ -116,10 +120,10 @@ public class Snake {
             Map<String, String> response = new HashMap<>();
             response.put("color", "#ff00ff");
 
-            GameState gameState = GameStateUtil.parseGameState(startRequest);
-
-            AStar aStar = new AStar();
-            List<Point> path = aStar.getNextPath();
+//            GameState gameState = GameStateUtil.parseGameState(startRequest);
+//
+//            AStar aStar = new AStar();
+//            List<Point> path = aStar.getNextPath();
 
             return response;
         }
@@ -136,13 +140,20 @@ public class Snake {
 
             GameState gameState = GameStateUtil.parseGameState(moveRequest);
 
+            Parser mapParser = new Parser();
+            char[][] asciiMap = mapParser.parse(gameState);
+
             AStar aStar = new AStar();
-            List<Point> path = aStar.getNextPath();
+            List<Point> path = aStar.getNextPath(asciiMap);
 
             GameMove gameMove = new GameMove(path);
+            GameObject playerHead = gameState.getLocalPlayer().getBody().get(0);
 
             if(path != null) {
-                response = gameMove.getNextAction();
+                Point playerPoint = PointUtil.parsePoint(playerHead.getX(), playerHead.getY());
+                Point targetPoint = path.get(0);
+
+                response = gameMove.getNextAction(playerPoint, targetPoint);
             }
 
             return response;
