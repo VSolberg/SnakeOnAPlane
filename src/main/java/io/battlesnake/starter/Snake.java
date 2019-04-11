@@ -2,11 +2,18 @@ package io.battlesnake.starter;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.battlesnake.Util.GameStateUtil;
+import io.battlesnake.action.GameMove;
+import io.battlesnake.models.GameState;
+import io.battlesnake.pathfinding.AStar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.Request;
 import spark.Response;
 
+import java.awt.*;
+import java.util.List;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -108,6 +115,12 @@ public class Snake {
         public Map<String, String> start(JsonNode startRequest) {
             Map<String, String> response = new HashMap<>();
             response.put("color", "#ff00ff");
+
+            GameState gameState = GameStateUtil.parseGameState(startRequest);
+
+            AStar aStar = new AStar();
+            List<Point> path = aStar.getNextPath();
+
             return response;
         }
 
@@ -119,7 +132,19 @@ public class Snake {
          */
         public Map<String, String> move(JsonNode moveRequest) {
             Map<String, String> response = new HashMap<>();
-            response.put("move", "right");
+            response.put("move", "left");
+
+            GameState gameState = GameStateUtil.parseGameState(moveRequest);
+
+            AStar aStar = new AStar();
+            List<Point> path = aStar.getNextPath();
+
+            GameMove gameMove = new GameMove(path);
+
+            if(path != null) {
+                response = gameMove.getNextAction();
+            }
+
             return response;
         }
 
