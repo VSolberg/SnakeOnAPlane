@@ -64,6 +64,8 @@ public class AStar {
             mapLayers[i] = new String(map[i]);
         }
 
+        mapLayers[7] = "XXXXXXXXXXXXXXX";
+
         System.out.println(mapLayers);
         Maze2D maze = new Maze2D(mapLayers);
 
