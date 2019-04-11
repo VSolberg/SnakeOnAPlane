@@ -2,11 +2,13 @@ package io.battlesnake.starter;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.battlesnake.models.GameState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.Request;
 import spark.Response;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -108,6 +110,17 @@ public class Snake {
         public Map<String, String> start(JsonNode startRequest) {
             Map<String, String> response = new HashMap<>();
             response.put("color", "#ff00ff");
+
+            ObjectMapper mapper = new ObjectMapper();
+            String json = startRequest.toString();
+            GameState gameState = new GameState();
+
+            try {
+                gameState = mapper.readValue(startRequest.toString(), GameState.class);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             return response;
         }
 
