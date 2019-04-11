@@ -15,7 +15,7 @@ public class PositionUtil {
             return "left";
         else if(xCords > 0)
             return "right";
-        else if(yCords < 0)
+        else if(yCords > 0)
             return "down";
         else
             return "up";

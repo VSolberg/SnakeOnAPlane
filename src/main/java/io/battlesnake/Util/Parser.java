@@ -50,12 +50,12 @@ public class Parser {
     {
         Integer width = game_state.getBoard().getWidth();
         Integer height = game_state.getBoard().getHeight();
-        char[][] new_board = new char[width][height];
+        char[][] new_board = new char[height][width];
 
         // Create an empty board:
-        for(Integer x=0; x<width; x++)
+        for(Integer y=0; y<height; y++)
         {
-            for (Integer y=0; y<height; y++)
+            for (Integer x=0; x<width; x++)
             {
                 new_board[y][x] = ' ';
             }
@@ -97,9 +97,9 @@ public class Parser {
                 {
                     for (Integer y=0; y<height; y++)
                     {
-                       if (new_board[x][y] != 'X' && new_board[x][y] != 'S')
+                       if (new_board[y][x] != 'X' && new_board[y][x] != 'S')
                        {
-                           new_board[x][y] = 'G';
+                           new_board[y][x] = 'G';
                            return new_board;
                        }
                     }
