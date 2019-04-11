@@ -9,9 +9,13 @@ import java.util.HashMap;
 import static java.lang.Math.abs;
 
 public class Parser {
-    HashMap<Double, GameObject> food_map;
+    private HashMap<Double, GameObject> food_map;
 
-    GameObject getClosestFood(GameState game_state)
+    public Parser() {
+        food_map = new HashMap<>();
+    }
+
+    private GameObject getClosestFood(GameState game_state)
     {
         Double shortest = 100000.0;
         GameObject shortest_food = null;
@@ -30,7 +34,7 @@ public class Parser {
 
             food_map.put(shortest, shortest_food);
 
-            if (distance > shortest)
+            if (distance < shortest)
             {
                 shortest = distance;
                 shortest_food = food;
@@ -40,11 +44,11 @@ public class Parser {
         return shortest_food;
     }
 
-    Character[][] parse(GameState game_state)
+    public char[][] parse(GameState game_state)
     {
         Integer width = game_state.getBoard().getWidth();
         Integer height = game_state.getBoard().getHeight();
-        Character[][] new_board = new Character[width][height];
+        char[][] new_board = new char[width][height];
 
         // Create an empty board:
         for(Integer x=0; x<width; x++)

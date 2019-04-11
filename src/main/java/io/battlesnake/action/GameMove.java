@@ -1,5 +1,8 @@
 package io.battlesnake.action;
 
+import io.battlesnake.Util.GameStateUtil;
+import io.battlesnake.Util.PositionUtil;
+
 import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
@@ -13,9 +16,12 @@ public class GameMove {
         this.path = path;
     }
 
-    public Map<String, String> getNextAction() {
+    public Map<String, String> getNextAction(Point playerPoint, Point targetPoint) {
         Map<String, String> response = new HashMap<>();
-        
 
+        String move = PositionUtil.calculateMoveDirection(targetPoint, playerPoint);
+        response.put("move", move);
+
+        return response;
     }
 }
